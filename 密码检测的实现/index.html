@@ -19,10 +19,18 @@
     </head>
     <body>
 		<div class="container">
+			<div class="codrops-top">
+                <span class="right">
+                    <a href=index3.html>
+                        <strong>forget the password</strong>
+                    </a>
+                </span>
+                <div class="clr"></div>
+            </div><!--/ Codrops top bar -->
             <header>
-			<h1>Login and Registration Form <span>with HTML5 and CSS3</span></h1>
+			<h1>云上传服务 </h1>
 				<nav class="codrops-demos">
-					<span>Click <strong>"Join us"</strong> to see the form switch</span>
+					<span>Click <strong>"Join us"</strong> to register</span>
 				</nav>
             </header>
             <section>				
@@ -149,22 +157,33 @@
 								</p>
 								<p>
 								<script>
-    var loginForm = document.getElementById('loginForm');
-    var submit = document.getElementById('submit');
-    submit.onclick = function(){
-        var password1 = loginForm.passwordsignup.value
-        //这里判断了用户名的输入不能为空，且长度为6-16位
-        if(password1 && (typeof(password1)!='undefined') && (password1!=0) && (password1.length>=6) && (password1.length<=16)){
-            //验证通过，提交表单数据
-            loginForm.submit();
-        }else{
-            alert('输入不符合规则');
-			history.back();
-			document.loginForm.passwordsignup.focus(); //输入焦点 到密码框。
-			return false; //返回一个 失败
-        }
-    }
-</script>
+								
+									
+    								var loginForm = document.getElementById('loginForm');
+    								var submit = document.getElementById('submit');
+    								submit.onclick = function(){
+        							var password1 = loginForm.passwordsignup.value;
+									var password2 = loginForm.passwordsignup_confirm.value;
+        							//这里判断了用户名的输入不能为空，且长度为6-16位
+        							if(password1 && (typeof(password1)!='undefined') && (password1!=0) && (password1.length>=6) && (password1.length<=16)){
+           							//验证通过，提交表单数据
+									if(password1!=password2){
+									alert('请检查密码两次填写是否正确');
+									}else{
+									
+									
+									loginForm.submit();
+									}
+        							}else{
+            						alert('请检查密码是否为空或者密码长度是否在6-16位之间');
+									history.back();
+									document.loginForm.passwordsignup.focus(); //输入焦点 到密码框。
+									return false; //返回一个 失败
+        								}
+									
+    								}
+								
+								</script>
 								</p>
                                 <p class="change_link">  
 									Already a member ?
