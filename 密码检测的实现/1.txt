@@ -1,0 +1,28 @@
+
+<summary>
+ 发送邮件找回密码
+</summary>
+<param name="Email">用户邮箱</param>
+ <param name="RanDom">6位数字随机码</param>
+public static void SendEmail(string Email, string RanDom, string Name)
+ {
+ MailMessage mail = new MailMessage();
+ mail.To.Add(new MailAddress(Email));
+ mail.Subject = "作业在线找回密码";
+ mail.SubjectEncoding = System.Text.Encoding.UTF8;
+ mail.Body = "尊敬的用户:" + Name + ".作业在线系统找回密码给你发的验证码是：" + RanDom + ".该验证码有效时间为30分钟，请注意自己的帐号安全，不要外泄密码！！";
+ mail.BodyEncoding = System.Text.Encoding.UTF8;
+ mail.IsBodyHtml = true;
+ mail.Priority = MailPriority.High;
+ SmtpClient smtpclient = new SmtpClient();
+ smtpclient.UseDefaultCredentials = true;
+ string EmailClass = Email.Substring(Email.LastIndexOf('@'));
+ smtpclient.Host = "smtp" + EmailClass;
+mail.From = new MailAddress("发送邮件的邮箱地址");
+ smtpclient.Credentials = new System.NET.NetworkCredential("发送邮件的邮箱地址", "密码");
+ smtpclient.Send(mail); 
+ }
+
+时间间隔:TimeSpan Ts1 = new TimeSpan(DateTime.Now.Ticks);
+ TimeSpan Ts2 = new TimeSpan(Dtime.Ticks);
+ double DiffTime = Ts2.Subtract(Ts1).Minutes

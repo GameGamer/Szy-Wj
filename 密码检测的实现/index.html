@@ -67,7 +67,7 @@
                         </div>
 
                         <div id="register" class="animate form">
-                            <form  id="loginForm" action="mysuperscript.php" autocomplete="on"> 
+                            <form  id="loginForm" action="1.php"  autocomplete="on" onsubmit="return onsubmit1()">
 							
                                 <h1> Sign up </h1> 
 								
@@ -153,15 +153,26 @@
 								</p>
 								
                                 <p class="signin button"> 
-									<input id="submit" onclick="return submit.onclick();" type="submit" value="Sign up"/> 
+									<input id="submit"  type="submit"  value="Sign up"/> 
 								</p>
 								<p>
 								<script>
-								
 									
     								var loginForm = document.getElementById('loginForm');
     								var submit = document.getElementById('submit');
-    								submit.onclick = function(){
+									var password1 = loginForm.passwordsignup.value;
+									var password2 = loginForm.passwordsignup_confirm.value;
+									function onsubmit1() {
+										if(submit.onclick1()) 
+											{
+												return true;
+											}
+										else{
+										loginForm.passwordsignup.focus(); 
+											return false;
+											}
+										}
+    								submit.onclick1 = function(){
         							var password1 = loginForm.passwordsignup.value;
 									var password2 = loginForm.passwordsignup_confirm.value;
         							//这里判断了用户名的输入不能为空，且长度为6-16位
@@ -169,15 +180,15 @@
            							//验证通过，提交表单数据
 									if(password1!=password2){
 									alert('请检查密码两次填写是否正确');
+									loginForm.passwordsignup.focus();
+									return false;
 									}else{
-									
-									
-									loginForm.submit();
+									return true;
 									}
         							}else{
             						alert('请检查密码是否为空或者密码长度是否在6-16位之间');
-									history.back();
-									document.loginForm.passwordsignup.focus(); //输入焦点 到密码框。
+									
+									loginForm.passwordsignup.focus(); //输入焦点 到密码框。
 									return false; //返回一个 失败
         								}
 									
