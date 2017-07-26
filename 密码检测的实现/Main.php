@@ -54,7 +54,7 @@ echo $_SESSION['name'];
 						</form>
                             <form  action="UploadFile.ashx" autocomplete="on">
                                 <p class="login button">
-                                    <input type="submit" value="上传文件" />
+                                    <input type="submit" name="submit" value="上传文件" />
 								</p>
 
                             </form>
