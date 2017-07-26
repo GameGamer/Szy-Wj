@@ -18,7 +18,7 @@ if(!isset($_POST['submit'])){
   $salt=$name;
   $iterations=1000;
   $hash = hash_pbkdf2("sha256", $password, $salt, $iterations, 20);
-  $sql="SELECT `UserName`, `PassWord`, `E-mail` FROM `user` WHERE (`UserName`='$name'or `E-mail`='$email') and `PassWord`='$hash'";
+  $sql="SELECT `UserName`, `PassWordByUser`, `E-mail`,`PasswordByEmail` FROM `user` WHERE (`UserName`='$name'or `E-mail`='$email') and (`PassWordByUser`='$hash' or `PasswordByEmail`='$hash')";
   $result = mysqli_query($conn, $sql);
   $num=mysqli_num_rows($result);
   if($num){
