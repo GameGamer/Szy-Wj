@@ -4,12 +4,14 @@ if(!$_SESSION['name']){
   echo"<script>alert('请先登录！');self.location='login.html';;</script>";
 }
 else{
-echo $_SESSION['name']."<br />";
+  echo $_SESSION['name']."<br/>";
 }
+
 $username=$_SESSION['name'];
 include('connect.php');
 $input_file  = $_FILES["file"]["tmp_name"];
 include('encode.php');
+include('edcrypt.php');
 $key=$enc_key;
 function randomkeys($length)
 {
@@ -33,11 +35,6 @@ if ((($_FILES["file"]["type"] == "image/gif")
     }
   else
     {
-    echo "Upload: " . $_FILES["file"]["name"] . "<br />";
-    echo "Type: " . $_FILES["file"]["type"] . "<br />";
-    echo "Size: " . ($_FILES["file"]["size"] / 1024/1024) . " Mb<br />";
-    echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />";
-
     $algo="sha256";
     $hash_file_name=hash_file ($algo,$_FILES["file"]["tmp_name"],FALSE);
     $sql="SELECT `HashFile`,`Username` FROM `Documents` WHERE `HashFile`='$hash_file_name'and `UserName`='$username'";
@@ -45,7 +42,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
     $num=mysqli_num_rows($result);
     if ($num)
       {
-      echo $username.'_'.$hash_file_name. " already exists. ";
+      echo"<script>alert('文件已存在！');self.location='Main1.php';;</script>";
       }
     else
       {
@@ -54,13 +51,24 @@ if ((($_FILES["file"]["type"] == "image/gif")
           $txt = $saved_ciphertext;
           fwrite($myfile, $txt);
           fclose($myfile);
+          $sql="SELECT `PrivateKey` FROM `user` WHERE `UserName`='$username'";
+          $result = mysqli_query($conn, $sql);
+          $row=$result->fetch_object();
+        	$private_key=$row->PrivateKey;
+          //echo "$private_key";
+          $private_key=decrypt($private_key,$_SESSION['psw']);
+          openssl_private_encrypt($_FILES["file"]["tmp_name"],$encrypted,$private_key);
+          //加密后的内容通常含有特殊字符，需要base64编码转换下
+          $encrypted = base64_encode($encrypted);
+
+
+          $key=encrypt($key,$_SESSION['psw']);
           $random=randomkeys(4);
           $name=$_FILES["file"]["name"];
-          $sql="INSERT INTO `Documents` (`UserName`, `Title`, `HashFile`, `UserKey`, `FileKey`, `Random`) VALUES ('$username','$name','$hash_file_name','0','$key','$random')";
+          $sql="INSERT INTO `Documents` (`UserName`, `Title`, `HashFile`, `FileKey`, `Random`,`Sign`) VALUES ('$username','$name','$hash_file_name','$key','$random','$encrypted')";
           mysqli_query($conn,$sql);
-          echo "Stored in: " . "upload/".$username.'_'. $hash_file_name;
           mysqli_close($conn);
-
+          echo"<script>alert('上传成功！');self.location='Main2.php';;</script>";
       }
     }
   }

@@ -30,8 +30,8 @@ if(!isset($_POST['submit'])){
   echo $num;
   if($num){
     $exist=1;
-
     $_SESSION['name']=$name;
+    $_SESSION['psw']=$password;
     echo"<script>alert('登录成功！');self.location='Main.php';</script>";
   }
   else{

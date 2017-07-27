@@ -16,6 +16,7 @@ if(!isset($_POST['submit'])){
   }
   else{
   include('connect.php');//链接数据库
+  include('edcrypt.php');
   $sql="SELECT `UserName`, `E-mail` FROM `user` WHERE `UserName`='$name'or `E-mail`='$email'";
   $result = mysqli_query($conn, $sql);
   $num=mysqli_num_rows($result);
@@ -25,16 +26,21 @@ if(!isset($_POST['submit'])){
   }
   else{
     //$algo=sha256;
+    $res=openssl_pkey_new(array('private_key_bits' => 512));
+    openssl_pkey_export($res, $private_key);
+    $public_key=openssl_pkey_get_details($res);
+    $public_key=$public_key["key"];
     $salt_name=$name;
     $iterations=1000;
+    $private=encrypt($private_key,$password);
     $hash_name = hash_pbkdf2("sha256", $password, $salt_name, $iterations, 20);
     $salt_email=$email;
     $hash_email=hash_pbkdf2("sha256", $password, $salt_email, $iterations, 20);
-    $sql = "INSERT INTO `user`(`UserName`, `PassWordByUser`, `E-mail`,`PasswordByEmail`,`Type`) VALUES ('$name','$hash_name','$email','$hash_email','0')";
+    $sql = "INSERT INTO `user`(`UserName`, `PassWordByUser`, `E-mail`,`PasswordByEmail`,`Type`,`PublicKey`,`PrivateKey`) VALUES ('$name','$hash_name','$email','$hash_email','0','$public_key','$private')";
     mysqli_query($conn, $sql);
     echo"<script>alert('注册成功！');self.location='login.html';</script>";
   }
-  mysql_close($conn);//关闭数据库
+  mysqli_close($conn);//关闭数据库
 }
 
 

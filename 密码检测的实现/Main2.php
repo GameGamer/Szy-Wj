@@ -54,7 +54,7 @@ if(!$_SESSION['name']){
               $result = mysqli_query($conn, $sql);
                 echo "文件名--------------------随机码<br/>";
               while($row=mysqli_fetch_array($result)){
-                echo $row['Title']."--------------------".$row['Random'];
+                echo $row['Title']."--------------------".$row['Random']."<br/>";
               }
               ?>
 
@@ -62,9 +62,12 @@ if(!$_SESSION['name']){
 
                    <input id="identifycode" name="identifycode" required="required" type="identifycode" placeholder="输入四位随机码"/>
                </p>
-               <p class="login button">
+               <p class="">
                    <input id="submit" type="submit" name="submit" value="下载文件" />
              </p>
+             <p class="">
+                 <input id="submit" type="button" onclick="location='Main1.php'" value="上传文件" />
+           </p>
 
 						</form>
 

@@ -48,14 +48,15 @@ echo $_SESSION['name'];
 
                     <div id="wrapper">
                         <div id="login" class="animate form">
-						<form  method="post" enctype="multipart/form-data">
-							<input type="file" name="fileUpload" onchange="filefujianChange(this)" />
+						<form  method="post" action="UpLoad.php" autocomplete="on" enctype="multipart/form-data">
+							<input type="file" name="file"  />
 
-						</form>
-                            <form  action="UploadFile.ashx" autocomplete="on">
-                                <p class="login button">
-                                    <input type="submit" value="上传文件" />
+                                <p class="">
+                                    <input type="submit" id="file" name="file" value="上传文件" />
 								</p>
+                <p class="">
+                    <input id="submit" type="button" onclick="location='Main2.php'" value="下载文件" />
+              </p>
 
                             </form>
                         </div>
