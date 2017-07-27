@@ -48,14 +48,13 @@ echo $_SESSION['name'];
 
                     <div id="wrapper">
                         <div id="login" class="animate form">
-						<form  action="Main2.php" autocomplete="on">
-                                <p class="">
-                                    <input type="submit" value="下载" />
-								</p>
+						<form  method="post" enctype="multipart/form-data">
+							<input type="file" name="fileUpload" onchange="filefujianChange(this)" />
+
 						</form>
-                            <form  action="Main1.php" autocomplete="on">
-                                <p class="">
-                                    <input type="submit" value="上传" />
+                            <form  action="UploadFile.ashx" autocomplete="on">
+                                <p class="login button">
+                                    <input type="submit" value="上传文件" />
 								</p>
 
                             </form>
@@ -63,7 +62,33 @@ echo $_SESSION['name'];
 
                     </div>
                 </div>
-				
+				<script>
+  var isIE = /msie/i.test(navigator.userAgent) && !window.opera; 
+   function filefujianChange(target) {
+       var fileSize = 0;         
+       if (isIE && !target.files) {     
+         var filePath = target.value;     
+         var fileSystem = new ActiveXObject("Scripting.FileSystemObject");        
+         var file = fileSystem.GetFile (filePath);     
+         fileSize = file.Size;    
+       } else {    
+        fileSize = target.files[0].size;     
+        }   
+        var size = fileSize / 1024;    
+        if(size>10000){  
+         alert("附件不能大于10M");
+         target.value="";
+         return
+        }
+        var name=target.value;
+        var fileName = name.substring(name.lastIndexOf(".")+1).toLowerCase();
+        if(fileName !="jpg" && fileName !="jpeg" && fileName !="pdf" && fileName !="png" && fileName !="dwg" && fileName !="gif" && fileName !="xls" && fileName !="xlsx" &&fileName !="docx" &&fileName !="doc"&& fileName !="txt" ){
+          alert("请选择图片格式文件上传(jpg,png,gif,dwg,pdf,gif等)或者office文档格式（doc,docx,txt,excl等）！");
+            target.value="";
+            return
+        }
+      }
+	 </script>
             </section>
         </div>
     </body>
