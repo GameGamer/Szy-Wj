@@ -50,7 +50,7 @@
     //$exist=1;
 		$smtp = new Smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
 		$smtp->debug = false;//是否显示发送的调试信息
-		$state = $smtp->sendmail("563038662@qq.com", $smtpusermail, $mailtitle, $mailcontent, $mailtype);
+		$state = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
 		$sql = "UPDATE `user` SET `IdetifyCode` = '$random' WHERE `user`.`E-mail` = '$smtpemailto' ";
     mysqli_query($conn, $sql);
     echo"<script>alert('恭喜！邮件发送成功！请输入验证码验证！');self.location='FindPassword1.html';</script>";

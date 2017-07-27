@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!$_SESSION['name']){
+  echo"<script>alert('请先登录！');self.location='login.html';;</script>";
+}
+else{
+echo $_SESSION['name'];
+}
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
@@ -14,72 +23,35 @@
         <meta name="author" content="Codrops" />
         <link rel="shortcut icon" href="../favicon.ico">
         <link rel="stylesheet" type="text/css" href="css/demo.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/style3.css" />
 		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
     </head>
     <body>
-		<div class="container">
-			<div class="codrops-top">
+        <div class="container">
+            <!-- Codrops top bar -->
+            <div class="codrops-top">
+
                 <span class="right">
-                    <a href=FindPassword.html>
-                        <strong>forget the password</strong>
+                    <a href=login.html>
+                        <strong>Back to login</strong>
                     </a>
                 </span>
                 <div class="clr"></div>
             </div><!--/ Codrops top bar -->
             <header>
-			<h1>云上传服务 </h1>
+                <h1>云上传服务 </h1>
 				<nav class="codrops-demos">
-					<span>Click <strong>"Join us"</strong> to register</span>
+					<span>Click <strong>"back to login"</strong> to login </span>
 				</nav>
             </header>
             <section>
                 <div id="container_demo" >
-                    <a class="hiddenanchor" id="toregister"></a>
-                    <a class="hiddenanchor" id="tologin"></a>
+
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form  action="login.php" method="post" autocomplete="on">
-                                <h1>Log in</h1>
-                                <p>
-                                    <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
-                                </p>
-                                <p>
-                                    <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
-                                </p>
-                                <p class="keeplogin">
-									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
-									<label for="loginkeeping">Keep me logged in</label>
-								</p>
-
-
-                                <p class="login button">
-                                    <input  type="submit" name="submit" value="Login" />
-								</p>
-
-                                <p class="change_link">
-									Not a member yet ?
-									<a href="#toregister" class="to_register">Join us</a>
-								</p>
-                            </form>
-                        </div>
-
-                        <div id="register" class="animate form">
-                            <form  id="loginForm" action="SignUp.php" method="post" autocomplete="on" onsubmit="return onsubmit1()">
-
-                                <h1> Sign up </h1>
-
-                                <p>
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
-                                </p>
-                                <p>
-                                    <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                                    <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
-                                </p>
-                                <p>
+                            <form id="loginForm" action="resettingpsword.php" method="post" autocomplete="on" onsubmit="return onsubmit1()">
+                                <h1>resetting Your Password</h1>
+                                    <p>
                                     <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
                                     <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
                                 </p>
@@ -205,6 +177,7 @@
 									Already a member ?
 									<a href="#tologin" class="to_register"> Go and log in </a>
 								</p>
+
                             </form>
                         </div>
 
@@ -214,3 +187,8 @@
         </div>
     </body>
 </html>
+<?php
+if($_GET['action'] == "logout"){
+  unset($_SESSION['name']);
+  echo"<script>alert('注销登录成功！');self.location='login.html';</script>";
+} ?>
