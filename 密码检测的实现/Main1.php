@@ -1,11 +1,9 @@
 <?php
 session_start();
 if(!$_SESSION['name']){
-  echo"<script>alert('请先登录！');self.location='login.html';;</script>";
+  echo"<script>alert('匿名用户禁止上传！');self.location='login.html';;</script>";
 }
-else{
-echo $_SESSION['name'];
-}
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->

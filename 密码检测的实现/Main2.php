@@ -1,7 +1,10 @@
 <?php
 session_start();
 if(!$_SESSION['name']){
-  echo"<script>alert('请先登录！');self.location='login.html';;</script>";
+  echo"<script>alert('匿名用户禁止上传！');self.location='login.html';;</script>";
+}
+else{
+  $name=$_SESSION['name'];
 }
 
 ?>
@@ -38,7 +41,7 @@ if(!$_SESSION['name']){
             <header>
                 <h1>云上传服务 </h1>
 				<nav class="codrops-demos">
-					<span>Hi <strong><?php echo $_SESSION['name'];?></strong> WelCome </span>
+					<span>Hi <strong><?php echo $name;?></strong> WelCome </span>
 				</nav>
             </header>
             <section>
@@ -49,7 +52,7 @@ if(!$_SESSION['name']){
 						<form  action="DownFile.php" method="post" autocomplete="on">
               <?php
               include('connect.php');
-              $name=$_SESSION['name'];
+
               $sql="SELECT `Title`,`Random` FROM `Documents` WHERE `UserName`='$name'";
               $result = mysqli_query($conn, $sql);
                 echo "文件名--------------------随机码<br/>";

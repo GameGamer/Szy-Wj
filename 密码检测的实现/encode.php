@@ -1,13 +1,13 @@
 <?php
 
 //$input_file  = $_FILES["file"]["tmp_name"];
-
+/*
 if(!is_file($input_file)) {
     fprintf(STDERR, "can not open file $input_file for read\n");
     fprintf(STDOUT, "usage: php " . $argv[0] . " <file_to_read for symmetric encryption demo>");
     exit(1);
 }
-
+*/
 // 计算原始明文的散列值
 $plaintext_hash = hash_file('sha256', $input_file);
 

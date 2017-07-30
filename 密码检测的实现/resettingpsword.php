@@ -1,7 +1,7 @@
 <?php
-if(!isset($_POST['submit'])){
-      echo"<script>alert('非法访问！');self.location='login.html';</script>";
-  }//判断是否有submit操作
+//if(!isset($_POST['submit'])){
+  //    echo"<script>alert('非法访问！');self.location='login.html';</script>";
+  //}//判断是否有submit操作
   //$exist=0;
   //$name=$_POST['usernamesignup'];
   //$email=$_POST['emailsignup'];
