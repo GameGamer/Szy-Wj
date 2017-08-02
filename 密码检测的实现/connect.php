@@ -4,7 +4,7 @@ $db_host = 'localhost';
 //用户名
 $db_user = 'root';
 //密码
-$db_password = 'wasdWJ0315';
+$db_password = 'Szylion19970107';
 //数据库名
 $db_name = 'User';
 //端口

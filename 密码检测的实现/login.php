@@ -22,14 +22,24 @@ if(!isset($_POST['submit'])){
   $sql="SELECT `UserName`, `PassWordByUser`, `E-mail`,`PasswordByEmail` FROM `user` WHERE (`UserName`='$name'or `E-mail`='$email') and (`PassWordByUser`='$hash' or `PasswordByEmail`='$hash')";
   $sql1="SELECT `UserName` FROM `user` WHERE (`UserName`='$name'or `E-mail`='$email')";
   $result1 = mysqli_query($conn, $sql1);
+
   $row=$result1->fetch_object();
 	$name=$row->UserName;
 	//echo $name;
   $result = mysqli_query($conn, $sql);
   $num=mysqli_num_rows($result);
   echo $num;
+
+$row=$result1->fetch_object();
+	$name=$row->UserName;
+	//echo $name;
+$result = mysqli_query($conn, $sql);
+  $num=mysqli_num_rows($result);
+echo $num;
+
   if($num){
     $exist=1;
+
     $_SESSION['name']=$name;
     $_SESSION['psw']=$password;
     echo"<script>alert('登录成功！');self.location='Main.php';</script>";

@@ -1,11 +1,6 @@
 <?php
 session_start();
 if(!$_SESSION['name']){
-
-  echo"<script>alert('匿名用户禁止上传！');self.location='login.html';;</script>";
-}
-
-
   echo"<script>alert('请先登录！');self.location='login.html';;</script>";
 }
 else{
@@ -45,11 +40,7 @@ echo $_SESSION['name'];
             <header>
                 <h1>云上传服务 </h1>
 				<nav class="codrops-demos">
-
-					<span>Hi <strong><?php echo $_SESSION['name'];?></strong> WelCome </span>
-
 					<span>Hi <strong>"back to login"</strong> WelCome </span>
-
 				</nav>
             </header>
             <section>
@@ -57,17 +48,6 @@ echo $_SESSION['name'];
 
                     <div id="wrapper">
                         <div id="login" class="animate form">
-
-						<form  method="post" action="UpLoad.php" autocomplete="on" enctype="multipart/form-data">
-							<input type="file" name="file"  />
-
-                                <p class="">
-                                    <input type="submit" id="file" name="file" value="上传文件" />
-								</p>
-                <p class="">
-                    <input id="submit" type="button" onclick="location='Main2.php'" value="下载文件" />
-              </p>
-
 						<form  method="post" enctype="multipart/form-data">
 							<input type="file" name="fileUpload" onchange="filefujianChange(this)" />
 
@@ -77,28 +57,12 @@ echo $_SESSION['name'];
                                     <input type="submit" value="上传文件" />
 								</p>
 
-
                             </form>
                         </div>
 
                     </div>
                 </div>
 				<script>
-
-  var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
-   function filefujianChange(target) {
-       var fileSize = 0;
-       if (isIE && !target.files) {
-         var filePath = target.value;
-         var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
-         var file = fileSystem.GetFile (filePath);
-         fileSize = file.Size;
-       } else {
-        fileSize = target.files[0].size;
-        }
-        var size = fileSize / 1024;
-        if(size>10000){
-
   var isIE = /msie/i.test(navigator.userAgent) && !window.opera; 
    function filefujianChange(target) {
        var fileSize = 0;         
@@ -112,7 +76,6 @@ echo $_SESSION['name'];
         }   
         var size = fileSize / 1024;    
         if(size>10000){  
-
          alert("附件不能大于10M");
          target.value="";
          return
@@ -130,11 +93,7 @@ echo $_SESSION['name'];
         </div>
     </body>
 </html>
-
-
-
-
-
+ 
 <?php
 if($_GET['action'] == "logout"){
   unset($_SESSION['name']);
